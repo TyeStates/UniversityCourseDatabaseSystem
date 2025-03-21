@@ -1,0 +1,9 @@
+TODO:
+High Prioity:
+  Database build in postgre - will be done by sunday evening (Tye)
+  php and other front end - Main portion, does not need to be super pretty, just functional for now. 
+  backend - Connect to DB, Connect to front end, ensure functions all work.
+
+Lower Priority: 
+  Presentation, slideshow and demo system.
+  Report
