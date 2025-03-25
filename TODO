@@ -1,9 +1,20 @@
 TODO:
 High Prioity:
-  Database build in postgre - will be done by sunday evening (Tye)
-  php and other front end - Main portion, does not need to be super pretty, just functional for now. 
-  backend - Connect to DB, Connect to front end, ensure functions all work.
+  Database build in postgre - will be done by sunday evening (Tye) (insert checkmark here)
+  interface and other front end - Main portion, does not need to be super pretty, just functional for now. 
+    - html, css, js
+    - search bar 
+    - interface for inserting data
+    - filter by department
+    - filter by prereq
+    - filter by name/code
+  php backend - Connect to DB, Connect to front end, ensure functions all work.
+    - query functions (mysqli_query) (filtering)
+    - $db 
+    - infile php, which means essentially make html file and write php code within it.
 
 Lower Priority: 
   Presentation, slideshow and demo system.
+   - Throw together last minute
   Report
+   - Write report, put example in.
