@@ -25,8 +25,8 @@
             FROM prerequisites
             LEFT JOIN coursesTaken
             ON prerequisites.pr_id = coursesTaken.c_id
-            AND coursesTaken.std_id = 2
-            WHERE prerequisites.c_id = 'COMP-3753'
+            AND coursesTaken.std_id = $student
+            WHERE prerequisites.c_id = '$id'
             AND coursesTaken.c_id IS NULL";
 
     $result = $conn->query($sql);
