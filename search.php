@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
 <html>
-    <!--html code here-->
     <head>
         <title>DBMS Project</title>
         <meta charset="UTF-8">
@@ -9,12 +8,17 @@
     <body>
         <div>
             <?php
+                if (isset($_GET['error'])){
+                    echo "<div class='error'>" . $_GET['error'] . "</div>";
+                }
+            ?>
+            <?php
                 session_start();
 
                 require 'connect.php';
 
-                $identifier = $_GET['searchInput'];
-                $filter = $_GET['filter'];
+                $identifier = $_GET['searchInput'] ?? null;
+                $filter = $_GET['filter'] ?? null;
 
                 if ($filter === "prereq"){
                     $sql1 = "SELECT *
@@ -32,14 +36,49 @@
                     echo "<div><p>Pre-requisites:</p></div>";
                     while ($row = $prerequisites->fetch_assoc()) {
                         echo "<div>
-                                <a href='search.php?searchInput=" . urlencode($row['c_id']) . "&filter=prereq'>" . htmlspecialchars($row['c_name']) . "</a>
-                            </div>";
+                            <a href='search.php?searchInput=" . urlencode($row['c_id']) . "&filter=prereq'>" . htmlspecialchars($row['c_name']) . "</a>";
+                        if ($_SESSION['role'] === 'student') {
+                            echo "<form method='post' action='enroll.php' style='display:inline; margin-left:10px;'>
+                                <input type='hidden' name='id' value='" . htmlspecialchars($row['c_id']) . "'>
+                                <input type='hidden' name='student' value='" . $_SESSION['id'] . "'>
+                                <button type='submit'>Enroll</button>
+                                </form>";
+                        }
+                        echo "</div>";
                     }
                     echo "<div><p>Required For:</p></div>";
                     while ($row = $requiredFor->fetch_assoc()) {
                         echo "<div>
-                                <a href='search.php?searchInput=" . urlencode($row['c_id']) . "&filter=prereq'>" . htmlspecialchars($row['c_name']) . "</a>
-                            </div>";
+                            <a href='search.php?searchInput=" . urlencode($row['c_id']) . "&filter=prereq'>" . htmlspecialchars($row['c_name']) . "</a>";
+                        if ($_SESSION['role'] === 'student') {
+                            echo "<form method='post' action='enroll.php' style='display:inline; margin-left:10px;'>
+                                <input type='hidden' name='id' value='" . htmlspecialchars($row['c_id']) . "'>
+                                <input type='hidden' name='student' value='" . $_SESSION['id'] . "'>
+                                <button type='submit'>Enroll</button>
+                                </form>";
+                        }
+                        echo "</div>";
+                    }
+                } else if ($filter === "enrolled"){
+                    $sql = "SELECT *
+                        FROM enrolled
+                        JOIN course ON enrolled.c_id = course.c_id
+                        WHERE enrolled.std_id = '" . $_SESSION['id'] . "'";
+
+                    $result = $conn->query($sql);
+    
+                    echo "<div><p>Courses</p></div>";
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<div>
+                            <a href='search.php?searchInput=" . urlencode($row['c_id']) . "&filter=prereq'>" . htmlspecialchars($row['c_name']) . "</a>";
+                        if ($_SESSION['role'] === 'student') {
+                            echo "<form method='post' action='enroll.php' style='display:inline; margin-left:10px;'>
+                                <input type='hidden' name='id' value='" . htmlspecialchars($row['c_id']) . "'>
+                                <input type='hidden' name='student' value='" . htmlspecialchars($_SESSION['id']) . "'>
+                                <button type='submit'>Enroll</button>
+                                </form>";
+                        }
+                        echo "</div>";
                     }
                 } else if ($identifier != ''){
                     if ($filter === "name"){
@@ -47,7 +86,10 @@
                     } else if ($filter === "id"){
                         $sql = "SELECT * FROM course WHERE c_id = '$identifier'";
                     } else {
-                        $sql = "SELECT * FROM course WHERE c_department = '$identifier'";
+                        $sql = "SELECT * 
+                            FROM department
+                            JOIN course ON course.c_department = department.d_id
+                            WHERE department.d_name = '$identifier'";
                     } 
     
                     $result = $conn->query($sql);
@@ -55,8 +97,15 @@
                     echo "<div><p>Courses</p></div>";
                     while ($row = $result->fetch_assoc()) {
                         echo "<div>
-                                <a href='search.php?searchInput=" . urlencode($row['c_id']) . "&filter=prereq'>" . htmlspecialchars($row['c_name']) . "</a>
-                            </div>";
+                            <a href='search.php?searchInput=" . urlencode($row['c_id']) . "&filter=prereq'>" . htmlspecialchars($row['c_name']) . "</a>";
+                        if ($_SESSION['role'] === 'student') {
+                            echo "<form method='post' action='enroll.php' style='display:inline; margin-left:10px;'>
+                                <input type='hidden' name='id' value='" . htmlspecialchars($row['c_id']) . "'>
+                                <input type='hidden' name='student' value='" . htmlspecialchars($_SESSION['id']) . "'>
+                                <button type='submit'>Enroll</button>
+                                </form>";
+                        }
+                        echo "</div>";
                     }
                 } else {
                     echo "No Identifier provided.";
