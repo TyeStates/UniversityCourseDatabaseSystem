@@ -113,5 +113,8 @@
                 $conn->close();
             ?>
         </div>
+        <div class='text-center'>
+            <a href="home.php">Home</a>
+        </div>
     </body>
 </html>
