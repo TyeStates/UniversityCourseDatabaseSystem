@@ -37,6 +37,7 @@
     </head>
     <body>
         <div class="main-container">
+            <iframe src="heading.php" width="100%" height="140"></iframe>
             <div class="text-center">
                 <h1 class="mb-4">University Course Prerequisite Database</h1>
                 
@@ -73,6 +74,7 @@
                     </div>
                 </div>
             </div>
+            <iframe src="footing.php" width="100%" height="10%">
         </div>
     </body>
 </html>
