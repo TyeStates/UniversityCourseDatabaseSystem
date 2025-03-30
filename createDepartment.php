@@ -62,52 +62,68 @@
 ?>
 <!DOCTYPE HTML>
 <html>
-    <!--html code here-->
     <head>
         <title>DBMS Project</title>
         <meta charset="UTF-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-        <h1 class="text-center">Create Department Page</h1>
-        <div class="text-center">
-            <form method="post">
-                <?php
-                    if (isset($_GET['error'])){
-                        echo "<div class='error'>" . $_GET['error'] . "</div>";
-                    }
-                ?>
-                <div class="mb-3">
-                    <label for="d_name" class="form-label"><strong>Department Name</strong></label>
-                    <input type="text" id="d_name" name="d_name" placeholder="Department Name" value="<?php echo $d_name; ?>" required>
+        <div class="container mt-5">
+            <h1 class="text-center mb-4">Create Department</h1>
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    <form method="post" onsubmit="return confirm('Are you sure you want to create this department?')">
+                        <?php
+                            if (isset($_GET['error'])){
+                                echo "<div class='alert alert-danger mb-3'>" . htmlspecialchars($_GET['error']) . "</div>";
+                            }
+                        ?>
+                        <div class="mb-3">
+                            <label for="d_name" class="form-label"><strong>Department Name</strong></label>
+                            <input type="text" class="form-control" id="d_name" name="d_name" 
+                                   placeholder="Enter department name" value="<?php echo htmlspecialchars($d_name); ?>" 
+                                   maxlength="100" required>
+                            <div class="form-text">Maximum 100 characters</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="d_code" class="form-label"><strong>Department Code</strong></label>
+                            <input type="text" class="form-control" id="d_code" name="d_code" 
+                                   placeholder="Enter department code" value="<?php echo htmlspecialchars($d_code); ?>" 
+                                   maxlength="10" required>
+                            <div class="form-text">Maximum 10 characters</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="d_email" class="form-label"><strong>Email</strong></label>
+                            <input type="email" class="form-control" id="d_email" name="d_email" 
+                                   placeholder="Enter email address" value="<?php echo htmlspecialchars($d_email); ?>" 
+                                   maxlength="100" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="d_phone" class="form-label"><strong>Phone Number</strong></label>
+                            <input type="tel" class="form-control" id="d_phone" name="d_phone" 
+                                   placeholder="Enter phone number" value="<?php echo htmlspecialchars($d_phone); ?>" 
+                                   maxlength="15" required>
+                            <div class="form-text">Format: +1234567890</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="d_address" class="form-label"><strong>Address</strong></label>
+                            <input type="text" class="form-control" id="d_address" name="d_address" 
+                                   placeholder="Enter address" value="<?php echo htmlspecialchars($d_address); ?>" 
+                                   maxlength="200" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="d_school" class="form-label"><strong>School</strong></label>
+                            <input type="text" class="form-control" id="d_school" name="d_school" 
+                                   placeholder="Enter school name" value="<?php echo htmlspecialchars($d_school); ?>" 
+                                   maxlength="100" required>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
+                            <button type="submit" class="btn btn-primary me-md-2">Create Department</button>
+                            <a href="manageDepartments.php" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <label for="d_code" class="form-label"><strong>Department Code</strong></label>
-                    <input type="text" id="d_code" name="d_code" placeholder="Department Code" value="<?php echo $d_code; ?>" required>
-                </div>
-                <div class="mb-3">
-                    <label for="d_email" class="form-label"><strong>Email</strong></label>
-                    <input type="text" id="d_email" name="d_email" placeholder="Email" value="<?php echo $d_email; ?>" require>
-                </div>
-                <div class="mb-3">
-                    <label for="d_phone" class="form-label"><strong>Phone Number</strong></label>
-                    <input type="text" id="d_phone" name="d_phone" placeholder="Phone Number" value="<?php echo $d_phone; ?>" required>
-                </div>
-                <div class="mb-3">
-                    <label for="d_address" class="form-label"><strong>Address</strong></label>
-                    <input type="text" id="d_address" name="d_address" placeholder="Address" value="<?php echo $d_address; ?>" required>
-                </div>
-                <div class="mb-3">
-                    <label for="d_school" class="form-label"><strong>School</strong></label>
-                    <input type="text" id="d_school" name="d_school" placeholder="School" value="<?php echo $d_school; ?>" required>
-                </div>
-                <div class="mb-3 justify-content-center">
-                    <input id="submit" type="submit" value="Submit">
-                </div>
-                <div class="mb-3">
-                    <a href='manageDepartments.php'>Back</a>
-                </div>
-            </form>
-        </div>  
+            </div>
+        </div>
     </body>
 </html>
