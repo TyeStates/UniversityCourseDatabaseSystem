@@ -10,7 +10,7 @@
         <div class="container-fluid">
             <header class="row text-center bg-secondary">
                 <h1>UCPRDB</h1>
-                <p class="col-1 text-end"><a href="index.php" target="_parent" class="btn btn-warning">logout</a></p>
+                <p class="col-1 text-end"><a href="logout.php" target="_parent" class="btn btn-warning">logout</a></p>
                 <p class="col-2 col-md"></p>
                 <form id="searchInput" action="search.php" method="get" class="col-6 col-md-auto text-align: right;">
                     <label for="searchInput">Course Search:</label>
