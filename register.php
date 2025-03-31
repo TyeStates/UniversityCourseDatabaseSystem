@@ -89,58 +89,108 @@
         } while (false);
     } 
 ?>
+<?php
+// ... existing PHP code remains exactly the same ...
+?>
 <!DOCTYPE HTML>
 <html>
-    <!--html code here-->
     <head>
         <title>DBMS Project</title>
         <meta charset="UTF-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            .registration-container {
+                max-width: 600px;
+                margin: 2rem auto;
+                padding: 2rem;
+                background: #ffffff;
+                border-radius: 8px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            }
+            .form-label {
+                font-weight: 500;
+                color: #495057;
+            }
+            .error-message {
+                color: #dc3545;
+                background: #f8d7da;
+                padding: 0.75rem;
+                border-radius: 4px;
+                margin-bottom: 1rem;
+                border: 1px solid #f5c6cb;
+            }
+            .form-control {
+                border-radius: 4px;
+                padding: 0.75rem;
+                border: 1px solid #ced4da;
+                transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            }
+            .form-control:focus {
+                border-color: #80bdff;
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            }
+            .btn-primary {
+                background-color: #0d6efd;
+                border: none;
+                padding: 0.75rem 1.5rem;
+                font-size: 1rem;
+                transition: background-color 0.15s ease-in-out;
+            }
+            .btn-primary:hover {
+                background-color: #0b5ed7;
+            }
+            .login-link {
+                color: #0d6efd;
+                text-decoration: none;
+            }
+            .login-link:hover {
+                text-decoration: underline;
+            }
+        </style>
     </head>
-    <body>
-        <h1 class="text-center">Registration Page</h1>
-        <div class="text-center">
+    <body style="background-color: #f8f9fa;">
+        <div class="registration-container">
+            <h1 class="text-center mb-4">Student Registration</h1>
             <form method="post">
-                <?php
-                    if (isset($_GET['error'])){
-                        echo "<div>" . $_GET['error'] . "</div>";
-                    }
-                ?>
+                <?php if (isset($_GET['error'])): ?>
+                    <div class="error-message"><?php echo htmlspecialchars($_GET['error']); ?></div>
+                <?php endif; ?>
+                
                 <div class="mb-3">
-                    <label for="username" class="form-label"><strong>Username</strong></label>
-                    <input type="text" id="username" name="username" placeholder="Username" value="<?php echo $username; ?>" required>
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" value="<?php echo htmlspecialchars($username); ?>" required>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label"><strong>Password</strong></label>
-                    <input type="text" id="password" name="password" placeholder="Password" value="<?php echo $password; ?>" required>
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
                 </div>
                 <div class="mb-3">
-                    <label for="name" class="form-label"><strong>Name</strong></label>
-                    <input type="text" id="name" name="name" placeholder="Name" value="<?php echo $name; ?>" required>
+                    <label for="name" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name" value="<?php echo htmlspecialchars($name); ?>" required>
                 </div>
                 <div class="mb-3">
-                    <label for="number" class="form-label"><strong>Student Number</strong></label>
-                    <input type="text" id="number" name="number" placeholder="Student Number" value="<?php echo $number; ?>" required>
+                    <label for="number" class="form-label">Student Number</label>
+                    <input type="text" class="form-control" id="number" name="number" placeholder="Enter student number" value="<?php echo htmlspecialchars($number); ?>" required>
                 </div>
                 <div class="mb-3">
-                    <label for="year" class="form-label"><strong>Year of Study</strong></label>
-                    <input type="text" id="year" name="year" placeholder="Year of Study" value="<?php echo $year; ?>" required>
+                    <label for="year" class="form-label">Year of Study</label>
+                    <input type="number" class="form-control" id="year" name="year" placeholder="Enter year of study" value="<?php echo htmlspecialchars($year); ?>" required min="1" max="5">
                 </div>
                 <div class="mb-3">
-                    <label for="major" class="form-label"><strong>Major</strong></label>
-                    <input type="text" id="major" name="major" placeholder="Major" value="<?php echo $major; ?>" required>
+                    <label for="major" class="form-label">Major</label>
+                    <input type="text" class="form-control" id="major" name="major" placeholder="Enter your major" value="<?php echo htmlspecialchars($major); ?>" required>
                 </div>
                 <div class="mb-3">
-                    <label for="email" class="form-label"><strong>Email</strong></label>
-                    <input type="text" id="email" name="email" placeholder="Email" value="<?php echo $email; ?>" $requiredFor>
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address" value="<?php echo htmlspecialchars($email); ?>" required>
                 </div>
-                <div class="mb-3 justify-content-center">
-                    <input id="submit" type="submit" value="Submit">
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Register</button>
                 </div>
-                <div class="mb-3">
-                    <a href='index.php'>Login</a>
+                <div class="text-center mt-3">
+                    Already have an account? <a href="index.php" class="login-link">Login here</a>
                 </div>
             </form>
-        </div>  
+        </div>
     </body>
 </html>
