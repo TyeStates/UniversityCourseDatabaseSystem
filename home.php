@@ -7,6 +7,15 @@
         header("Location: index.php");
         exit();
     }
+
+    if($_SESSION['role'] === 'student'){
+        $sys = mysqli_connect("localhost", "course_db_user", "1234", "ucprdb");
+        $id = $_SESSION['id'];
+        $getCompleted = "SELECT * FROM coursesTaken WHERE std_id = $id;";
+        $getEnrolled = "SELECT * FROM enrolled WHERE std_id = $id;";
+        $completed = mysqli_query($sys, $getCompleted);
+        $enrolled = mysqli_query($sys, $getEnrolled);
+    }
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -73,6 +82,36 @@
                     <div class="mt-3">
                         <a href="logout.php" class="btn btn-danger">Log Out</a>
                     </div>
+                </div>
+                <div class="container">
+                    <table class="table table-bordered text-dark">
+                        <thead>
+                            <th>enrolled</th>
+                        </thead>
+                        <tbody>
+                            <?php
+                                while($row = mysqli_fetch_array($enrolled)){
+                                    echo "<tr>";
+                                    echo "<td>".$row['c_id']."</td>";
+                                    echo "</tr>";
+                                }              
+                            ?>
+                        </tbody>
+                    </table>
+                    <table class = "table table-bordered text-dark">
+                        <thead>
+                            <th>taken</th>
+                        </thead>
+                        <tbody>
+                            <?php
+                                while($row = mysqli_fetch_array($completed)){
+                                    echo "<tr>";
+                                    echo "<td>".$row['c_id']."</td>";
+                                    echo "</tr>";
+                                }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <iframe src="footing.php" width="100%" height="10%">
