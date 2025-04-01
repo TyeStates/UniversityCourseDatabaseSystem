@@ -66,6 +66,7 @@
                             echo '<a href="manageUsers.php" class="btn btn-outline-primary">Manage Users</a>';
                             echo '<a href="manageCourses.php" class="btn btn-outline-primary">Manage Courses</a>';
                             echo '<a href="manageDepartments.php" class="btn btn-outline-primary">Manage Departments</a>';
+                            echo '<a href="endSemester.php" class="btn btn-outline-primary">end semester</sa>';
                             echo '</div>';
                         }
                     ?>
